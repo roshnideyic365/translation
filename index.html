@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minion Translator</title>
+  </head>
+  <style>
+    body {
+      background: #e1adad;
+      font-size: 1.5rem;
+    }
+    div {
+      background: #e1adad;
+      padding: 20px 60px 20px 60px;
+      width: 600px;
+      height: 400px;
+      background: #e1adad;
+      box-shadow: 5px 5px 10px #cb9c9c, -5px -5px 10px #f8bebe;
+      text-align: center;
+      align-items: center;
+      margin: auto;
+      margin-top: 100px;
+      border-radius: 50px;
+    }
+    input {
+      padding: 30px 100px 30px 100px;
+      border-radius: 50px;
+      font-size: 1.5rem;
+      box-shadow: inset 12px 12px 12px #cbced1, inset -12px -12px 12px white;
+    }
+    button {
+      margin-top: 10px;
+      padding: 20px 30px 20px 30px;
+      border-radius: 10px;
+      background: #e1adad;
+      box-shadow: 5px 5px 10px #cb9c9c, -5px -5px 10px #f8bebe;
+    }
+  </style>
+  <body>
+    <div>
+      <h2>Minnion Translator</h2>
+      <input type="text" class="inputElement" />
+      <button class="btn">Translate</button>
+      <br />
+      <h1 class="h1element"></h1>
+    </div>
+    <script>
+      const inputElement = document.querySelector(".inputElement");
+      const btn = document.querySelector(".btn");
+      const h1Element = document.querySelector(".h1element");
+
+      btn.addEventListener("click", translate);
+      let url = "https://api.funtranslations.com/translate/minion.json";
+      function translate() {
+        let inputValue = inputElement.value;
+        newUrl = `${url}?text=${inputValue}`;
+        fetch(newUrl)
+          .then((data) => data.json())
+          .then((data) => {
+            console.log(data);
+            h1Element.innerHTML = data.contents.translated;
+          });
+      }
+    </script>
+  </body>
+</html>
